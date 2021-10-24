@@ -8,6 +8,8 @@
         :type="isPwd ? 'password' : 'text'"
         :modelValue="password"
         @update:modelValue="event => $emit('update:password', event)"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Password required' ]"
     >
         <template v-slot:prepend>
             <q-icon 

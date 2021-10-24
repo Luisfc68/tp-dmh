@@ -7,6 +7,8 @@
         ref='nombre'
         :modelValue="nombre"
         @update:modelValue="event => $emit('update:nombre', event)"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Username required' ]"
     >
         <template v-slot:prepend>
             <q-icon name='person'/>

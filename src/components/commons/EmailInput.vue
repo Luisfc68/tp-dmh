@@ -8,6 +8,8 @@
         type='email'
         :modelValue="email"
         @update:modelValue="event => $emit('update:email', event)"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Email required' ]"
     >
         <template v-slot:prepend>
             <q-icon name='email'/>
