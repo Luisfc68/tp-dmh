@@ -4,7 +4,23 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { 
+        path: '', 
+        redirect: '/login',
+        component: () => import('pages/Index.vue'),
+        children: [
+          {
+            path: 'login',
+            name: 'login',
+            component: () => import('components/auth/LoginCard.vue')
+          },
+          {
+            path: 'signup',
+            name: 'signup',
+            component: () => import('components/auth/SignUpCard.vue')
+          }
+        ]
+       }
     ]
   },
 
