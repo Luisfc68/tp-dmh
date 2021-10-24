@@ -2,7 +2,7 @@
 const routes = [
   {
     path: '/',
-    component: () => import('src/layouts/AuthLayout.vue'),
+    component: () => import('src/layouts/MainLayout.vue'),
     children: [
       { 
         path: '', 
@@ -22,6 +22,11 @@ const routes = [
         ]
        }
     ]
+  },
+
+  {
+    path:'/selection',
+    component: () => import('src/layouts/AppLayout.vue')
   },
 
   // Always leave this as last one,
