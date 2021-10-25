@@ -1,5 +1,5 @@
 <template>
-    <q-btn  flat round icon='backspace' color='grey-5' @click="$emit('close')" class='fixed-top-right q-mt-md q-mr-lg z-top'/>
+    <q-btn  flat round icon='backspace' color='grey-5' @click="$emit('close')" class='fixed-top-right q-pr-xs q-mt-md q-mr-lg z-top'/>
     <UserInfoComponent :usuario='usuario'/>
         <FavChatComponent
             v-for='chat in usuario.favChats' 

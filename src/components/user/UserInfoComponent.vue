@@ -13,7 +13,7 @@
                     {{usuario.email}}
                 </q-item-label>
         </q-item-section>
-        <q-item-section side class='self-right q-pr-xs q-pt-lg'>
+        <q-item-section side class='absolute-right q-mr-md q-pr-xs q-pt-xl'>
             <q-btn flat outline round icon='settings' color='grey-5'/>
         </q-item-section>
     </q-item>

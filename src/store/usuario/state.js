@@ -1,7 +1,7 @@
 export default {
   usuario: {
     id:'111',
-    username: 'VioletWalker10111',
+    username: 'VioletWalker10111111',
     email: 'luis@correo',
     favChats:[
       {

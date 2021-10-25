@@ -1,5 +1,5 @@
 <template>
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple class='text-capitalize'>
             <q-item-section top avatar>
                 <q-avatar>
                     <img src="https://i.imgur.com/dnJejEA.jpeg">
