@@ -13,7 +13,9 @@
                 <q-btn flat outline round icon="star" color="yellow" @click="click()"/>
             </q-item-section>
         </q-item>
-        <q-badge class="text-primary q-mx-xs" outline v-for='tag in chat.tags' :label='tag' :key='tag'/>
+        <div class='q-px-md'>
+            <q-badge class='text-primary q-mx-xs' outline v-for='tag in chat.tags' :label='tag' :key='tag'/>
+        </div>
     <q-separator class='q-my-sm'/>
 </template>
 <script>

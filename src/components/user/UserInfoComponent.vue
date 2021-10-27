@@ -17,7 +17,7 @@
             <q-btn flat outline round icon='settings' color='grey-5'/>
         </q-item-section>
     </q-item>
-    <q-separator/>
+    <q-separator class='q-mb-sm'/>
 
 </template>
 <script>
