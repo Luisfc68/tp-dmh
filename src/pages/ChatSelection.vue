@@ -8,7 +8,7 @@
   </q-page>
 </template>
 <script>
-import ChatComponent from '../components/chat/ChatComponent.vue'
+import ChatComponent from '../components/chat/ChatItemComponent.vue'
 
 export default {
   name: 'ChatSelectionPage',
