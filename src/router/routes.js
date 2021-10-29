@@ -25,12 +25,15 @@ const routes = [
   },
 
   {
-    path:'/app',
     component: () => import('src/layouts/AppLayout.vue'),
     children:[
       {
-        path: '/selection',
+        path: '/lobby',
         component: () => import('src/pages/ChatSelection.vue')
+      },
+      {
+        path: '/chat',
+        component: () => import('src/pages/ChatPage.vue') 
       }
     ]
   },
