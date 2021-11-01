@@ -5,17 +5,17 @@ const routes = [
     component: () => import('src/layouts/MainLayout.vue'),
     children: [
       { 
-        path: '', 
-        redirect: '/login',
+        path: 'auth', 
+        redirect: 'login',
         component: () => import('pages/Index.vue'),
         children: [
           {
-            path: 'login',
+            path: '',
             name: 'login',
             component: () => import('components/auth/LoginCard.vue')
           },
           {
-            path: 'signup',
+            path: '',
             name: 'signup',
             component: () => import('components/auth/SignUpCard.vue')
           }
@@ -25,14 +25,17 @@ const routes = [
   },
 
   {
+    path: '/app',
     component: () => import('src/layouts/AppLayout.vue'),
     children:[
       {
-        path: '/lobby',
+        path: '',
+        name:'lobby',
         component: () => import('src/pages/ChatSelection.vue')
       },
       {
-        path: '/chat',
+        path: '',
+        name: 'chat',
         component: () => import('src/pages/ChatPage.vue') 
       }
     ]
