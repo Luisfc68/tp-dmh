@@ -22,3 +22,5 @@ export default boot(( {app,store} ) =>{
     })
     app.config.globalProperties.$socket = socket
 })
+
+export {socket}
