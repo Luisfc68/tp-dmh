@@ -5,7 +5,7 @@
         <q-card-section >
             <NombreInput v-model:nombre="nombre" ref='nombre' />
             <EmailInput v-model:email="email" ref='email' />
-            <PasswordInput v-model:password="password" ref='password' />
+            <PasswordInput v-model:password="password" :required="true" ref='password' />
         </q-card-section>
         <q-separator/>
         <q-card-actions class='q-pa-md' align='right'>

@@ -9,7 +9,7 @@
         :modelValue="password"
         @update:modelValue="event => $emit('update:password', event)"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Password required' ]"
+        :rules="[ (val => val && val.length > 0 || !required) || 'Password required' ]"
     >
         <template v-slot:prepend>
             <q-icon 
@@ -34,6 +34,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     name: 'PasswordInput',
     props: {
+        required: Boolean,
         password:String
     },
     data(){

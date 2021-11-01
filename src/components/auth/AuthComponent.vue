@@ -4,7 +4,7 @@
             <q-card-section class='bg-primary text-white row q-mb-md'>
                 <div class="text-h5 col self-center q-pl-md">{{ modoActual.titulo }}</div>
                     <q-btn
-                        :to='modoActual.siguiente'
+                        :to='{name: modoActual.siguiente}'
                         color='secondary'
                         style='top:30px; font-size: 0.7rem'
                         @click="toggleLogin()"
