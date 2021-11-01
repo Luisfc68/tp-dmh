@@ -1,5 +1,10 @@
+import { GET_TOKEN, GET_USUARIO } from "./types"
+
 export default {
-    getUsuario(state){
+    [GET_USUARIO](state){
         return state.usuario
+    },
+    [GET_TOKEN](state){
+        return state.token
     }
 }
