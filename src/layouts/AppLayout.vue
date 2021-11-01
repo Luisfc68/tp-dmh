@@ -27,6 +27,7 @@
 <script>
 import { ref } from 'vue'
 import ProfileComponent from 'components/user/ProfileComponent.vue'
+import { GET_USUARIO } from 'src/store/usuario/types'
 
 export default {
   name: 'AppLayout',
@@ -35,7 +36,7 @@ export default {
   },
   computed:{
       usuario: function(){
-          return this.$store.getters['usuario/getUsuario']
+          return this.$store.getters['usuario/'+GET_USUARIO]
       }
   },
   setup () {
