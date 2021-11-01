@@ -5,7 +5,7 @@ export default{
         state.usuario = data
     },
     [QUITAR_USUARIO](state){
-        state.usuario = null
+        state.usuario = {}
     },
     [PONER_TOKEN](state,data){
         state.token = data

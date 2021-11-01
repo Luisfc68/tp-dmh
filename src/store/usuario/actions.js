@@ -1,5 +1,6 @@
 import { CONNECTION_SUCCESS_ACTION, LOGIN_ACTION, LOGOUT_ACTION, PONER_TOKEN, PONER_USUARIO, QUITAR_TOKEN, QUITAR_USUARIO } from './types'
 import userService from '../../services/userService' 
+import { socket } from '../../boot/socketio'
 
 export default {
     [LOGIN_ACTION]: ({commit},data) => {
@@ -17,6 +18,7 @@ export default {
     },
     [LOGOUT_ACTION]:({commit}) => {
         localStorage.removeItem('token')
+        socket.disconnect()
         commit(QUITAR_TOKEN)
         commit(QUITAR_USUARIO)
     },
