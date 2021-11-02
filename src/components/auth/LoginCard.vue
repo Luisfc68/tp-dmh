@@ -2,6 +2,7 @@
     <q-form
         ref='form'
         @reset="onReset()"
+        @submit='login()'
     >
         <q-card-section >
             <NombreInput v-model:nombre="nombre" ref='nombre' />
@@ -9,7 +10,7 @@
         </q-card-section>
         <q-separator/>
         <q-card-actions class='q-pa-md' align='right'>
-            <q-btn push class='q-mx-md' icon='done'  @click='login()'>  Log in  </q-btn>
+            <q-btn push class='q-mx-md' icon='done' type='submit'>  Log in  </q-btn>
             <q-btn push class='q-mx-md' type='reset' icon='cancel'>  Cancel  </q-btn>
         </q-card-actions>
     </q-form>

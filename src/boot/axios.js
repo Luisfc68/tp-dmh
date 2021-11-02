@@ -18,7 +18,8 @@ export default boot(({ app,store }) => {
   //       so you can easily perform requests against your app's API
   api.interceptors.request.use(function (config) {
     const token = store.getters['usuario/'+GET_TOKEN]
-    config.headers.Authorization = 'Bearer '+token
+    if(token)
+      config.headers.Authorization = 'Bearer '+token
   
     return config
   })
