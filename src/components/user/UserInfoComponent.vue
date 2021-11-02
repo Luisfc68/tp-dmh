@@ -2,11 +2,11 @@
     <q-item class='q-pl-md q-pt-md bg-primary' bordered >
         <q-item-section avatar>
             <q-avatar size='5rem'>
-                <q-img src='https://i.imgur.com/PGaubL6.png'/>
+                <q-img v-show='id' :src="profileImg+id" ref='imagen'/>
             </q-avatar>
         </q-item-section>
-        <q-item-section thumbnail class='text-h6 text-white text-capitalize'>
-                <q-item-label lines="1">
+        <q-item-section thumbnail class='text-h6 text-white'>
+                <q-item-label class='text-capitalize' lines="1">
                     {{ usuario.username }}
                 </q-item-label>
                 <q-item-label caption class='text-grey-4'>
@@ -19,12 +19,13 @@
     </q-item>
     <q-separator class='q-mb-sm'/>
     <q-dialog v-model='editando' persistent>
-        <UserEdicion :usuario='usuario'/>
+        <UserEdicion :usuario='usuario' @close='editando=false' @updated='refrescar()'/>
     </q-dialog>
 
 </template>
 <script>
 import UserEdicion from './edicion/UserEdicion.vue'
+import  { GET_USUARIO } from '../../store/usuario/types' 
 
 export default {
     name: 'UserInfoComponent',
@@ -34,7 +35,20 @@ export default {
     },
     data(){
         return {
-            editando: false
+            editando: false,
+            profileImg: this.$api.defaults.baseURL+'/user/image/',
+            stamp: 0
+        }
+    },
+    computed:{
+        id(){
+            let id =  this.$store.getters['usuario/'+GET_USUARIO].id
+            return id ? id+'?stamp='+this.stamp : undefined
+        }
+    },
+    methods:{
+        refrescar(){
+            this.stamp += 1
         }
     }
 }
