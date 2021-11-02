@@ -58,8 +58,8 @@ export default {
                 })
             })
             .then((token) => {
-                this.$socket.auth.token = token
-                this.$socket.connect()
+                this.$socket.client.auth.token = token
+                this.$socket.client.connect()
                 this.$refs.form.reset()
                 this.$router.push({name: 'lobby'})
             })
