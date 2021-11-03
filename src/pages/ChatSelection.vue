@@ -1,135 +1,53 @@
 <template>
   <q-page class="flex flex-center">
     <div class='q-pa-md' style='width: 95%'>
+      <div class='full-width row justify-end'>
+        <q-btn round size='sm' color="primary" icon="add" class='q-mb-sm q-mr-lg' @click='this.creando = true'/>
+      </div>
       <q-list>
         <ChatComponent v-for='chat in chats' :key='chat.id' :chat='chat'/>
       </q-list>
     </div>
   </q-page>
+  <q-dialog v-model='creando' persistent>
+    <ChatEdicion :creationMode='true' @close='creando=false' @created='refresh()'/> 
+  </q-dialog>
 </template>
 <script>
 import ChatComponent from '../components/chat/ChatItemComponent.vue'
+import ChatEdicion from '../components/chat/edicion/ChatEdicion.vue'
+import {CHAT_REQUEST} from 'src/socket/socketEvents'
 
 export default {
   name: 'ChatSelectionPage',
   components: {
-    ChatComponent
+    ChatComponent,
+    ChatEdicion
   },
   data(){
     return {
-      chats:[
-        {
-          title: 'titulo largooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'Chat de Luis Fernando Chavez Quevedo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-        {
-          title: 'titulo',
-          description: 'descripcion',
-          tags:['1','2','3'],
-          id: 54321,
-          owner:{
-            username: 'luisfc68',
-            id: 987654
-          }
-        },
-      ]
+      chats:[],
+      creando: false
     } 
+  },
+  methods:{
+    pedir(){
+      this.$socket.client.emit(CHAT_REQUEST,{
+        offset: this.chats.length
+      })
+    },
+    refresh(){
+      this.chats = []
+      this.pedir()
+    }
+  },
+  sockets:{
+    [CHAT_REQUEST](data){
+      this.chats.push(...data);
+    }
+  },
+  mounted(){
+    this.pedir()
   }
 }
 </script>
