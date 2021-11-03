@@ -35,30 +35,44 @@
         </q-card-section>
         <q-separator/>
         <q-card-section :class="'q-ml-'+computedMargins+' q-pt-sm row justify-between'">
-            <div class='text-h6'>
-                <q-item-label caption>
-                    Created by:
-                </q-item-label>
-                <q-chip :ripple='false'>
-                    <q-avatar size='40px'>
-                        <q-img :src='ownerImageUrl'/>
-                    </q-avatar>
-                    {{chat.owner.username}}
-                </q-chip>
+            <div v-if='chat.owner.id !== loggedId'>
+                <div class='text-h6'>
+                    <q-item-label caption>
+                        Created by:
+                    </q-item-label>
+                    <q-chip :ripple='false'>
+                        <q-avatar size='40px'>
+                            <q-img :src='ownerImageUrl'/>
+                        </q-avatar>
+                        {{chat.owner.username}}
+                    </q-chip>
+                </div>
+            </div>
+            <div v-else class='q-mt-sm row no-wrap'>
+                <q-btn outline round color='grey-4' icon='settings'  @click='askForUpdate()'/>
+                <q-btn class='q-ml-md' outline round color='negative' icon='delete' @click='deleteChat()'/>
             </div>
             <div :class="'q-mr-'+computedMargins+' q-mt-sm row no-wrap'">
-                <q-btn class='q-mx-sm' outline rounded color="primary" label="Join" />
-                <q-btn class='q-mx-sm' outline round text-color='grey-4' icon="star" />
+                <q-btn class='q-mx-sm' outline rounded color='primary' label='Join' />
+                <q-btn class='q-mx-sm' outline round text-color='grey-4' icon='star' />
             </div>
         </q-card-section>
     </q-card>
     </q-expansion-item>
 </template>
 <script>
+import {GET_USUARIO} from 'src/store/usuario/types'
+import chatService from 'src/services/chatService'
 
 export default{
     name: 'ChatComponent',
     props: ['chat'],
+    emits: ['deleted','update'],
+    data(){
+        return {
+            loggedId: this.$store.getters['usuario/'+GET_USUARIO].id
+        }
+    },
     computed:{
         computedFontSize(){
             return this.$q.platform.is.desktop ? 'text-h4' : 'text-h5 text-weight-regular'
@@ -74,6 +88,35 @@ export default{
         },
         ownerImageUrl(){
             return this.$api.defaults.baseURL+'/user/image/'+this.chat.owner.id
+        }
+    },
+    methods:{
+        deleteChat(){
+            this.$q.dialog({
+                title: 'Eliminar chat',
+                message: '¿Seguro que quieres eliminar el chat?',
+                persistent: true,
+                cancel: true,
+                ok:{
+                    color: 'negative'
+                }
+            })
+            .onOk( () => {
+                chatService.delete(this.chat.id)
+                .then((res) => {
+                    console.log(res)
+                    this.$emit('deleted')
+                })
+                .catch(e => {
+                    this.$q.notify({
+                        type: 'negative',
+                        message: e
+                    })
+                })
+            })
+        },
+        askForUpdate(){
+            this.$emit('update',this.chat)
         }
     }
 }
