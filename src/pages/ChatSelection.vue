@@ -4,9 +4,16 @@
       <div class='full-width row justify-end'>
         <q-btn round size='sm' color="primary" icon="add" class='q-mb-sm q-mr-lg' @click='crear()'/>
       </div>
-      <q-list>
-        <ChatComponent v-for='chat in chats' :key='chat.id' :chat='chat' @deleted='refresh()' @update='(data) => actualizar(data)'/>
-      </q-list>
+      <q-infinite-scroll @load='onLoad' :offset='1' ref='scroll'>
+        <q-list>
+          <ChatComponent v-for='chat in chats' :key='chat.id' :chat='chat' @deleted='refresh()' @update='(data) => actualizar(data)'/>
+        </q-list>
+        <template v-slot:loading>
+          <div class="row justify-center q-my-md">
+            <q-spinner-dots color="primary" size="40px" />
+          </div>
+        </template>
+      </q-infinite-scroll>
     </div>
   </q-page>
   <q-dialog v-model='creando' persistent>
@@ -39,6 +46,12 @@ export default {
     } 
   },
   methods:{
+    onLoad(index, done){
+      this.pedir()
+      setTimeout(() => {
+        done()
+      },2000)
+    },
     pedir(){
       this.$socket.client.emit(CHAT_REQUEST,{
         offset: this.chats.length
@@ -62,10 +75,9 @@ export default {
   sockets:{
     [CHAT_REQUEST](data){
       this.chats.push(...data);
+      if(data.length === 0)
+        this.$refs.scroll.stop()
     }
-  },
-  mounted(){
-    this.pedir()
   }
 }
 </script>
