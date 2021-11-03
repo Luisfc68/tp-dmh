@@ -1,4 +1,4 @@
-import { CONNECTION_SUCCESS_ACTION, LOGIN_ACTION, LOGOUT_ACTION, PONER_TOKEN, PONER_USUARIO, QUITAR_TOKEN, QUITAR_USUARIO, UPDATE_USUARIO } from './types'
+import { CONNECTION_SUCCESS_ACTION, ADD_FAV_CHAT_ACTION, RM_FAV_CHAT_ACTION, LOGIN_ACTION, LOGOUT_ACTION, PONER_TOKEN, PONER_USUARIO, QUITAR_TOKEN, QUITAR_USUARIO, UPDATE_USUARIO, UPDATE_FAV_CHAT, GET_USUARIO, CAMBIAR_FAV_CHAT } from './types'
 import userService from '../../services/userService' 
 import { socket } from '../../boot/socketio'
 
@@ -26,6 +26,19 @@ export default {
         commit(PONER_USUARIO,data)
     },
     [UPDATE_USUARIO]({commit},data){
+        commit(PONER_USUARIO,data)
+    },
+    [UPDATE_FAV_CHAT]({commit,getters},data){
+        let usuario = getters[GET_USUARIO]
+        let index = usuario.favChats.findIndex(c => c.id === data.id)
+        if(index>-1)
+            commit(CAMBIAR_FAV_CHAT,{index,chat: data})
+    },
+    [RM_FAV_CHAT_ACTION]({commit},data){
+        console.log(data)
+        commit(PONER_USUARIO,data)
+    },
+    [ADD_FAV_CHAT_ACTION]({commit},data){
         commit(PONER_USUARIO,data)
     }
 }

@@ -2,7 +2,7 @@
         <q-item clickable v-ripple class='text-capitalize'>
             <q-item-section top avatar>
                 <q-avatar>
-                    <img src="https://i.imgur.com/dnJejEA.jpeg">
+                    <img :src='chatImage'>
                 </q-avatar>
             </q-item-section>
             <q-item-section>
@@ -19,11 +19,30 @@
     <q-separator class='q-my-sm'/>
 </template>
 <script>
+import { RM_FAV_CHAT } from 'src/socket/socketEvents'
 export default {
     name: 'FavChatComponent',
     props: ['chat'],
+    data(){
+        return {
+            stamp: 0
+        }
+    },
+    computed:{
+        chatImage(){
+            return this.$api.defaults.baseURL+'/chat/image/'+this.chat.id+'?stamp='+this.stamp
+        }
+    },
     methods:{
-        click: () => console.log('click')
+        click(){
+            this.$socket.client.emit(RM_FAV_CHAT,{chatId: this.chat.id})
+        }
+    },
+    watch:{
+        chat: function() {
+            console.log('cambio')
+            this.stamp += 1
+        } 
     }
 }
 </script>

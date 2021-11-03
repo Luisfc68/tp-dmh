@@ -122,6 +122,8 @@
 </template>
 <script>
 import chatService from 'src/services/chatService'
+import { mapActions } from 'vuex'
+import { GET_USUARIO, UPDATE_FAV_CHAT } from 'src/store/usuario/types'
 
 export default {
     name: 'ChatEdicion',
@@ -145,6 +147,7 @@ export default {
         }
     },
     methods:{
+        ...mapActions('usuario',[UPDATE_FAV_CHAT]),
         addTag(){
             if(this.newTag !== '')
                 this.chat.tags.push(this.newTag)
@@ -191,12 +194,15 @@ export default {
                     type: 'positive',
                     message: 'Actualizacion exitosa'
                 })
+                let usuario = this.$store.getters['usuario/'+GET_USUARIO]
+                if(usuario.favChats.some(c => c.id === this.chat.id))
+                    this.updateFavChat(this.chat)
             })
             .catch(e => {
-                let msg = (e.response.status === 400)? 'Datos invalidos' : e.response.data.message
+                console.log(e)
                 this.$q.notify({
                     type: 'negative',
-                    message: msg
+                    message: e.response.data.message
                 })
             })
         }

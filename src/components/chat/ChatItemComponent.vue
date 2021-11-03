@@ -54,7 +54,7 @@
             </div>
             <div :class="'q-mr-'+computedMargins+' q-mt-sm row no-wrap'">
                 <q-btn class='q-mx-sm' outline rounded color='primary' label='Join' />
-                <q-btn class='q-mx-sm' outline round text-color='grey-4' icon='star' />
+                <q-btn class='q-mx-sm' outline round :text-color='computedStar' icon='star' @click='execFav()'/>
             </div>
         </q-card-section>
     </q-card>
@@ -63,6 +63,7 @@
 <script>
 import {GET_USUARIO} from 'src/store/usuario/types'
 import chatService from 'src/services/chatService'
+import { ADD_FAV_CHAT, RM_FAV_CHAT } from 'src/socket/socketEvents'
 
 export default{
     name: 'ChatComponent',
@@ -88,6 +89,12 @@ export default{
         },
         ownerImageUrl(){
             return this.$api.defaults.baseURL+'/user/image/'+this.chat.owner.id
+        },
+        isFav(){
+            return this.$store.getters['usuario/'+GET_USUARIO].favChats.filter(c => c.id === this.chat.id).length !== 0
+        },
+        computedStar(){
+            return this.isFav ? 'yellow' : 'grey-4'
         }
     },
     methods:{
@@ -117,6 +124,12 @@ export default{
         },
         askForUpdate(){
             this.$emit('update',this.chat)
+        },
+        execFav(){
+            if(this.isFav)
+                this.$socket.client.emit(RM_FAV_CHAT,{ chatId: this.chat.id})
+            else
+                this.$socket.client.emit(ADD_FAV_CHAT,{ chatId: this.chat.id})
         }
     }
 }

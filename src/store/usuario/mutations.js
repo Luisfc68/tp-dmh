@@ -1,4 +1,4 @@
-import { PONER_TOKEN, PONER_USUARIO, QUITAR_TOKEN, QUITAR_USUARIO } from "./types"
+import { PONER_TOKEN, PONER_USUARIO, QUITAR_TOKEN, QUITAR_USUARIO,CAMBIAR_FAV_CHAT } from "./types"
 
 export default{
     [PONER_USUARIO] (state,data) {
@@ -12,5 +12,9 @@ export default{
     },
     [QUITAR_TOKEN](state){
         state.token = null
+    },
+    [CAMBIAR_FAV_CHAT](state,data){
+        state.usuario.favChats[data.index] = data.chat
     }
+
 }
