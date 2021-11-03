@@ -13,6 +13,8 @@
 import ChatInput from '../components/chat/ChatInput.vue'
 import ChatHeader from '../components/chat/ChatHeader.vue'
 import ChatArea from '../components/chat/ChatArea.vue'
+import { mapGetters } from 'vuex'
+import { GET_CHAT } from 'src/store/chat/types'
 
 export default {
     name: 'ChatPage',
@@ -21,18 +23,12 @@ export default {
        ChatHeader,
        ChatArea
     },
-    data(){
-        return {
-            chat: {
-                title: 'titulo largooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
-                description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio est enim quibusdam veritatis tempora consectetur alias voluptates, eligendi, itaque quos fuga libero nemo minima earum illum eum quisquam? Nulla, maiores.',
-                tags:['1','2','3','hola','como','estas','tengo','hambre'],
-                id: 54321,
-                    owner:{
-                        username: 'luisfc68',
-                        id: 987654
-                    }
-            }
+    methods:{
+        ...mapGetters('chat',[GET_CHAT])
+    },
+    computed:{
+        chat(){
+            return this.getChat()
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-        <q-item clickable v-ripple class='text-capitalize'>
+        <q-item clickable v-ripple class='text-capitalize' @click='join()'>
             <q-item-section top avatar>
                 <q-avatar>
                     <img :src='chatImage'>
@@ -10,7 +10,7 @@
                 <q-item-label lines="1" caption>{{chat.description}}</q-item-label>
             </q-item-section>
             <q-item-section side top>
-                <q-btn flat outline round icon="star" color="yellow" @click="click()"/>
+                <q-btn flat outline round icon="star" color="yellow" @click="rm()"/>
             </q-item-section>
         </q-item>
         <div class='q-px-md'>
@@ -19,13 +19,17 @@
     <q-separator class='q-my-sm'/>
 </template>
 <script>
-import { RM_FAV_CHAT } from 'src/socket/socketEvents'
+import { RM_FAV_CHAT,JOIN_ROOM,ERROR } from 'src/socket/socketEvents'
+import { mapActions } from 'vuex'
+import { JOIN_ACTION } from 'src/store/chat/types'
+
 export default {
     name: 'FavChatComponent',
     props: ['chat'],
     data(){
         return {
-            stamp: 0
+            stamp: 0,
+            selected: false
         }
     },
     computed:{
@@ -34,8 +38,13 @@ export default {
         }
     },
     methods:{
-        click(){
+        ...mapActions('chat',[JOIN_ACTION]),
+        rm(){
             this.$socket.client.emit(RM_FAV_CHAT,{chatId: this.chat.id})
+        },
+        join(){
+            this.selected = true
+            this.$socket.client.emit(JOIN_ROOM,{chatId: this.chat.id})
         }
     },
     watch:{
@@ -43,6 +52,20 @@ export default {
             console.log('cambio')
             this.stamp += 1
         } 
+    },
+    sockets:{
+        [JOIN_ROOM](data){
+            if(data === true && this.selected){
+                this.joinAction(this.chat).then(() =>{
+                    this.$router.push({name: 'chat'})
+                    this.selected = false
+                })
+                
+            }
+        },
+        [ERROR](data){
+            console.log(data)
+        }
     }
 }
 </script>

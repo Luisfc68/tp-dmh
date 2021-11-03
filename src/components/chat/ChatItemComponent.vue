@@ -53,7 +53,7 @@
                 <q-btn class='q-ml-md' outline round color='negative' icon='delete' @click='deleteChat()'/>
             </div>
             <div :class="'q-mr-'+computedMargins+' q-mt-sm row no-wrap'">
-                <q-btn class='q-mx-sm' outline rounded color='primary' label='Join' />
+                <q-btn class='q-mx-sm' outline rounded color='primary' label='Join' @click='join()'/>
                 <q-btn class='q-mx-sm' outline round :text-color='computedStar' icon='star' @click='execFav()'/>
             </div>
         </q-card-section>
@@ -63,7 +63,9 @@
 <script>
 import {GET_USUARIO} from 'src/store/usuario/types'
 import chatService from 'src/services/chatService'
-import { ADD_FAV_CHAT, RM_FAV_CHAT } from 'src/socket/socketEvents'
+import { ADD_FAV_CHAT, JOIN_ROOM, RM_FAV_CHAT, ERROR } from 'src/socket/socketEvents'
+import { mapActions } from 'vuex'
+import { JOIN_ACTION } from 'src/store/chat/types'
 
 export default{
     name: 'ChatComponent',
@@ -71,7 +73,8 @@ export default{
     emits: ['deleted','update'],
     data(){
         return {
-            loggedId: this.$store.getters['usuario/'+GET_USUARIO].id
+            loggedId: this.$store.getters['usuario/'+GET_USUARIO].id,
+            selected: false
         }
     },
     computed:{
@@ -98,6 +101,7 @@ export default{
         }
     },
     methods:{
+        ...mapActions('chat',[JOIN_ACTION]),
         deleteChat(){
             this.$q.dialog({
                 title: 'Eliminar chat',
@@ -130,6 +134,23 @@ export default{
                 this.$socket.client.emit(RM_FAV_CHAT,{ chatId: this.chat.id})
             else
                 this.$socket.client.emit(ADD_FAV_CHAT,{ chatId: this.chat.id})
+        },
+        join(){
+            this.selected = true
+            this.$socket.client.emit(JOIN_ROOM,{chatId: this.chat.id})
+        }
+    },
+    sockets:{
+        [JOIN_ROOM](data){
+            if(data === true && this.selected){
+                this.joinAction(this.chat).then(() => {
+                    this.$router.push({name: 'chat'})
+                    this.selected = false
+                })
+            }
+        },
+        [ERROR](data){
+            console.log(data)
         }
     }
 }
