@@ -17,6 +17,8 @@
             />
         </div>
         <q-input
+            @keyup.enter="send()"
+            v-model='content'
             filled
             autogrow
             input-style='max-height: 3rem'
@@ -24,6 +26,7 @@
         />
         <div class='col-1 self-end q-mb-sm flex justify-center'>
             <q-btn 
+                @click='send()' 
                 round 
                 dense 
                 flat 
@@ -33,8 +36,38 @@
     </div>
 </template>
 <script>
-export default {
-    name: 'ChatInput'
+import { GET_USUARIO } from 'src/store/usuario/types'
+import { mapGetters } from 'vuex'
 
+export default {
+    name: 'ChatInput',
+    emits: ['newMessage'],
+    data(){
+        return {
+            content: ''
+        }
+    },
+    methods:{
+        ...mapGetters('usuario',[GET_USUARIO]),
+        send(){
+
+            if(this.content.trim() === '')
+                return
+
+            let user = this.getUsuario()
+
+            const msg = {
+                content: this.content.trim(),
+                timestamp: Date.now(),
+                user:{
+                    id: user.id,
+                    username: user.username
+                }
+            }
+
+            this.$emit('newMessage',msg)
+            this.content = ''
+        }
+    }
 }
 </script>

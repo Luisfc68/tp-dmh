@@ -2,7 +2,7 @@
     <div class="column">
         <q-chat-message
             :name='nombre'
-            avatar="https://static.13.cl/7/sites/default/files/esports/articulos/field-image/ricardo-milos_1.jpg"
+            :avatar='avatarImage'
             :text='[message.content]'
             :stamp="fecha+' - '+hora"
             text-color="white"
@@ -49,6 +49,9 @@ export default {
         },
         bgColor(){
             return this.isOwner ? 'primary' : 'secondary'
+        },
+        avatarImage(){
+            return this.$api.defaults.baseURL+'/user/image/'+this.message.user.id
         }
     }
 }
