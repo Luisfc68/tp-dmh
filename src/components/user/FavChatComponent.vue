@@ -19,7 +19,7 @@
     <q-separator class='q-my-sm'/>
 </template>
 <script>
-import { RM_FAV_CHAT,JOIN_ROOM,ERROR } from 'src/socket/socketEvents'
+import { RM_FAV_CHAT,JOIN_ROOM,ERROR,JOIN_CONFIRM } from 'src/socket/socketEvents'
 import { mapActions } from 'vuex'
 import { JOIN_ACTION } from 'src/store/chat/types'
 
@@ -54,8 +54,8 @@ export default {
         } 
     },
     sockets:{
-        [JOIN_ROOM](data){
-            if(data === true && this.selected){
+        [JOIN_CONFIRM](){
+            if(this.selected){
                 this.joinAction(this.chat).then(() =>{
                     this.$router.push({name: 'chat'})
                     this.selected = false
