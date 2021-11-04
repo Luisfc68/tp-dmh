@@ -47,6 +47,11 @@ export default {
                 done()
 
             },1500)
+        },
+        newSingleMessage(){
+            const reference = this.$refs.area
+            const { getScrollTarget, setVerticalScrollPosition  } = scroll
+            setVerticalScrollPosition(getScrollTarget(reference), reference.clientHeight)
         }
     }
 }
