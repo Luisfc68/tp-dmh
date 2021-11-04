@@ -7,6 +7,9 @@ const JOIN_ROOM = 'joinRoom'
 const ERROR = 'error'
 const MSG_REQUEST = 'msgRequest'
 const MSG_SENT = 'msgSent'
+const LEAVE_ROOM = 'leaveRoom'
+const CLEAN_LEAVE_ROOM = 'cleanLeaveRoom'
+const JOIN_CONFIRM = 'joinConfirm'
 
 export {
     CONNECTION_SUCCESS,
@@ -16,5 +19,8 @@ export {
     JOIN_ROOM,
     ERROR,
     MSG_REQUEST,
-    MSG_SENT
+    MSG_SENT,
+    LEAVE_ROOM,
+    CLEAN_LEAVE_ROOM,
+    JOIN_CONFIRM
 }

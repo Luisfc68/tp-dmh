@@ -15,7 +15,7 @@ import ChatHeader from '../components/chat/ChatHeader.vue'
 import ChatArea from '../components/chat/ChatArea.vue'
 import { mapGetters } from 'vuex'
 import { GET_CHAT } from 'src/store/chat/types'
-import {MSG_REQUEST, MSG_SENT, ERROR, JOIN_ROOM} from 'src/socket/socketEvents'
+import {MSG_REQUEST, MSG_SENT, ERROR, JOIN_ROOM,LEAVE_ROOM, CLEAN_LEAVE_ROOM} from 'src/socket/socketEvents'
 
 export default {
     name: 'ChatPage',
@@ -63,6 +63,29 @@ export default {
         [JOIN_ROOM](data){
             this.messages.push({
                 content: data.username+' se ha unido al chat!',
+                timestamp: Date.now(),
+                user:{
+                    id: data.id,
+                    username: data.username
+                }
+            })
+            this.notifyNew()
+        },
+        [LEAVE_ROOM](data){
+            this.messages.push({
+                content: data.username+' ha salido del chat :(',
+                timestamp: Date.now(),
+                user:{
+                    id: data.id,
+                    username: data.username
+                }
+            })
+            this.notifyNew()
+        },
+        [CLEAN_LEAVE_ROOM](){
+            this.messages = this.messages.filter(m => m.user.id !== data.user.id)
+            this.messages.push({
+                content: data.username+' se esfumo :O',
                 timestamp: Date.now(),
                 user:{
                     id: data.id,

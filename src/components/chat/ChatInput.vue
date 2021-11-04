@@ -5,11 +5,13 @@
                 round 
                 dense 
                 flat 
-                icon='logout' 
+                icon='logout'
+                @click='leave()' 
             />
         </div>
         <div class='col-1 self-end q-mb-sm q-mr-sm'>
             <q-btn 
+                @click='cleanLeave()'
                 round 
                 dense 
                 flat 
@@ -38,6 +40,7 @@
 <script>
 import { GET_USUARIO } from 'src/store/usuario/types'
 import { mapGetters } from 'vuex'
+import { CLEAN_LEAVE_ROOM, LEAVE_ROOM } from 'src/socket/socketEvents'
 
 export default {
     name: 'ChatInput',
@@ -67,6 +70,24 @@ export default {
 
             this.$emit('newMessage',msg)
             this.content = ''
+        },
+        leave(){
+            this.$socket.client.emit(LEAVE_ROOM)
+            this.$router.push({name: 'lobby'})
+        },
+        cleanLeave(){
+            this.$q.dialog({
+                title: 'Esfumarse',
+                message: '¿Seguro que quieres borrar todos tus mensajes?',
+                persistent: true,
+                cancel: true,
+                ok:{
+                    color: 'negative'
+                }
+            }).onOk(() =>{
+                this.$socket.client.emit(CLEAN_LEAVE_ROOM)
+                this.$router.push({name: 'lobby'})
+            })
         }
     }
 }
