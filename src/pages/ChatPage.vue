@@ -3,7 +3,7 @@
         <div class='full-width limited'>
             <ChatHeader :chat='chat' class='absolute limited' style='z-index: 1;'/>
             <div class='relative-position' style='border: solid red 2px; top: 88px;'>    
-                <ChatArea ref='area' :messages='messages' :messagesRemain='messagesRemain' style='max-height: 700px; height:calc(100vh - 215px);'/>
+                <ChatArea :newMsg='newMsg' :messages='messages' :messagesRemain='messagesRemain' style='max-height: 700px; height:calc(100vh - 215px);'/>
                 <ChatInput @newMessage='(msg) => sendMessage(msg)'/>
             </div>
         </div>
@@ -27,7 +27,8 @@ export default {
     data(){
         return{
             messages: [],
-            messagesRemain: true
+            messagesRemain: true,
+            newMsg: false
         }
     },
     methods:{
@@ -37,6 +38,10 @@ export default {
             this.$socket.client.emit(MSG_SENT,{
                 content: msg.content
             })
+            this.notifyNew()
+        },
+        notifyNew(){
+            this.newMsg = !this.newMsg
         }
     },
     computed:{
@@ -53,7 +58,7 @@ export default {
         },
         [MSG_SENT](data){
             this.messages.push(data)
-            this.$refs.area.newSingleMessage()
+            this.notifyNew()
         },
         [JOIN_ROOM](data){
             this.messages.push({
@@ -64,7 +69,7 @@ export default {
                     username: data.username
                 }
             })
-            this.$refs.area.newSingleMessage()
+            this.notifyNew()
         },
         [ERROR](error){
             console.log(error)
