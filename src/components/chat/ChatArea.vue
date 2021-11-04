@@ -37,9 +37,9 @@ export default {
                     this.$refs.scroll.stop()
 
                 if(this.messages.length <= 10)
-                    this.$refs.area.setScrollPercentage('vertical', 1)
+                    this.mover(1)
                 else
-                    this.$refs.area.setScrollPercentage('vertical', 0.2)
+                    this.mover(0.2)
                 
                 done()
 
@@ -47,8 +47,12 @@ export default {
         },
         newSingleMessage(){
             setTimeout(() => {
-                this.$refs.area.setScrollPercentage('vertical', 1)
-            },300)
+                this.mover(1)
+            },150)
+        },
+        mover(porcentaje){
+            if(this.$refs.area)
+                this.$refs.area.setScrollPercentage('vertical', porcentaje)
         }
     },
     watch:{
