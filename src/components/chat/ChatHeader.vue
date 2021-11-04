@@ -5,7 +5,7 @@
                 <div class='row'>
                     <q-item-section avatar class='q-pr-md'>
                         <q-avatar size='72px'>
-                            <q-img src='http://pm1.narvii.com/7527/310c26220f0c8c94f9a41f2db54e3f8fb43c3c3cr1-1178-1200v2_00.jpg'/>
+                            <q-img :src='imageUrl'/>
                         </q-avatar>
                     </q-item-section>
                     <q-item-section>
@@ -26,6 +26,11 @@
 <script>
 export default {
     name: 'ChatHeader',
-    props: ['chat']
+    props: ['chat'],
+    computed: {
+        imageUrl(){
+            return this.$api.defaults.baseURL+'/chat/image/'+this.chat.id
+        }
+    }
 }
 </script>

@@ -10,7 +10,7 @@
                 <q-item-label lines="1" caption>{{chat.description}}</q-item-label>
             </q-item-section>
             <q-item-section side top>
-                <q-btn flat outline round icon="star" color="yellow" @click="rm()"/>
+                <q-btn flat outline round icon="star" color="yellow" @click.stop='rm()'/>
             </q-item-section>
         </q-item>
         <div class='q-px-md'>

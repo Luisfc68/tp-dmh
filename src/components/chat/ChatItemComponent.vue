@@ -94,7 +94,7 @@ export default{
             return this.$api.defaults.baseURL+'/user/image/'+this.chat.owner.id
         },
         isFav(){
-            return this.$store.getters['usuario/'+GET_USUARIO].favChats.filter(c => c.id === this.chat.id).length !== 0
+            return this.$store.getters['usuario/'+GET_USUARIO].favChats?.filter(c => c.id === this.chat.id).length !== 0
         },
         computedStar(){
             return this.isFav ? 'yellow' : 'grey-4'

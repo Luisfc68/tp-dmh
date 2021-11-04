@@ -5,6 +5,7 @@ const ADD_FAV_CHAT = 'addFavChat'
 const RM_FAV_CHAT =  'rmFavChat'
 const JOIN_ROOM = 'joinRoom'
 const ERROR = 'error'
+const MSG_REQUEST = 'msgRequest'
 
 export {
     CONNECTION_SUCCESS,
@@ -12,5 +13,6 @@ export {
     ADD_FAV_CHAT,
     RM_FAV_CHAT,
     JOIN_ROOM,
-    ERROR
+    ERROR,
+    MSG_REQUEST
 }
