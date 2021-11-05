@@ -4,10 +4,10 @@
       <div class='full-width row justify-between'>
 
         <div class='q-ml-lg q-mb-sm row items-end'>
-          <q-input v-model='query' label='Busca chats (# -> tags)' dense @keyup.enter='pedirQuery()' :disable='searching' >
+          <q-input v-model='query' label='Busca chats (# -> tags)' dense @keyup.enter='pedirQuery(false)' :disable='searching' >
             <template v-slot:append>
               <q-icon v-if="query !== ''" name='close' @click='resetQuery()' class='cursor-pointer' />
-              <q-icon name='search' class='cursor-pointer' @click='pedirQuery()' />
+              <q-icon name='search' class='cursor-pointer' @click='pedirQuery(false)' />
             </template>
           </q-input>
         </div>
@@ -17,7 +17,7 @@
         </div>
 
       </div>
-      <q-infinite-scroll @load='onLoad' :offset='1' ref='scroll'>
+      <q-infinite-scroll @load='onLoad' :offset='350' ref='scroll'>
         <q-list>
           <ChatComponent v-for='chat in chats' :key='chat.id' :chat='chat' @deleted='refresh()' @update='(data) => actualizar(data)'/>
         </q-list>
@@ -65,7 +65,7 @@ export default {
       if(this.query === '')
         this.pedir()
       else
-        this.pedirQuery()
+        this.pedirQuery(true)
       setTimeout(() => {
         done()
       },2000)
@@ -81,10 +81,13 @@ export default {
       const parsed = { title,tags }
       return parsed
     },
-    pedirQuery(){
+    pedirQuery(isNextPage){
       this.searching = true
       const query = this.parsearQuery()
-      this.chats = []
+      if(!isNextPage){
+        this.chats = []
+        this.$refs.scroll.resume()  
+      }
       let busqueda = {
         offset: this.chats.length,
         title: query.title,
@@ -98,6 +101,7 @@ export default {
     },
     refresh(){
       this.chats = []
+      this.$refs.scroll.resume()
       this.pedir()
     },
     crear(){
