@@ -82,8 +82,8 @@ export default {
             })
             this.notifyNew()
         },
-        [CLEAN_LEAVE_ROOM](){
-            this.messages = this.messages.filter(m => m.user.id !== data.user.id)
+        [CLEAN_LEAVE_ROOM](data){
+            this.messages = this.messages.filter(m => m.user.id !== data.id)
             this.messages.push({
                 content: data.username+' se esfumo :O',
                 timestamp: Date.now(),
