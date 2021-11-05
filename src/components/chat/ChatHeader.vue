@@ -27,9 +27,19 @@
 export default {
     name: 'ChatHeader',
     props: ['chat'],
+    data(){
+        return {
+            stamp: 0
+        }
+    },
     computed: {
         imageUrl(){
-            return this.$api.defaults.baseURL+'/chat/image/'+this.chat.id
+            return this.$api.defaults.baseURL+'/chat/image/'+this.chat.id+'?stamp='+this.stamp
+        }
+    },
+    watch:{
+        chat: function(){
+            this.stamp += 1
         }
     }
 }

@@ -10,6 +10,7 @@ const MSG_SENT = 'msgSent'
 const LEAVE_ROOM = 'leaveRoom'
 const CLEAN_LEAVE_ROOM = 'cleanLeaveRoom'
 const JOIN_CONFIRM = 'joinConfirm'
+const CHAT_CHANGED = 'chatChanged'
 
 export {
     CONNECTION_SUCCESS,
@@ -22,5 +23,6 @@ export {
     MSG_SENT,
     LEAVE_ROOM,
     CLEAN_LEAVE_ROOM,
-    JOIN_CONFIRM
+    JOIN_CONFIRM,
+    CHAT_CHANGED
 }
