@@ -1,11 +1,11 @@
 <template>
     <div style='width: 80%; max-width: 500px;'>
-        <q-card class='my-card'>
+        <q-card class='my-card light'>
             <q-card-section class='bg-primary text-white row q-mb-md'>
                 <div class="text-h5 col self-center q-pl-md">{{ modoActual.titulo }}</div>
                     <q-btn
                         :to='{name: modoActual.siguiente}'
-                        color='secondary'
+                        color='dark'
                         style='top:30px; font-size: 0.7rem'
                         @click="toggleLogin()"
                     >

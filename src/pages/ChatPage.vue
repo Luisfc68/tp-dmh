@@ -2,7 +2,7 @@
     <q-page class='flex justify-center'>
         <div class='full-width limited'>
             <ChatHeader :chat='chat' class='absolute limited' style='z-index: 1;'/>
-            <div class='relative-position' style='border: solid red 2px; top: 88px;'>    
+            <div class='relative-position' style='top: 88px;'>    
                 <ChatArea :newMsg='newMsg' :messages='messages' :messagesRemain='messagesRemain' style='max-height: 700px; height:calc(100vh - 215px);'/>
                 <ChatInput @newMessage='(msg) => sendMessage(msg)'/>
             </div>

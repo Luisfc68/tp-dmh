@@ -7,9 +7,9 @@
             :stamp="fecha+' - '+hora"
             text-color="white"
             :bg-color='bgColor'
-            style='max-width: 70%'
+            style='max-width: 70%;'
             :sent='isOwner'
-            :class='isOwnerStyle'
+            :class="isOwnerStyle+' text-weight-medium'"
         />
     </div>
 </template>

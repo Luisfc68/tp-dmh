@@ -10,8 +10,8 @@
         </q-card-section>
         <q-separator/>
         <q-card-actions class='q-pa-md' align='right'>
-            <q-btn push class='q-mx-md' icon='done' type='submit'>  Log in  </q-btn>
-            <q-btn push class='q-mx-md' type='reset' icon='cancel'>  Cancel  </q-btn>
+            <q-btn push class='q-mx-md' icon='done' type='submit' color='secondary'>  Log in  </q-btn>
+            <q-btn push class='q-mx-md' type='reset' icon='close' color='secondary'>  Cancel  </q-btn>
         </q-card-actions>
     </q-form>
 </template>
@@ -61,3 +61,8 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+#formulario{
+    background-color: #FEDFD4;
+}
+</style>

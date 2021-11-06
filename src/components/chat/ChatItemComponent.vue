@@ -1,5 +1,5 @@
 <template>
-    <q-expansion-item popup expand-separator>
+    <q-expansion-item popup expand-separator header-class='bg-info text-grey-10' expand-icon-class='text-grey-9'>
         <template v-slot:header>
             <div class='column q-py-sm overflow-hidden' style='width: 100%'>
                 <div class='row'>
@@ -28,7 +28,7 @@
                 </q-item-section>
             </div>
         </template>
-    <q-card>
+    <q-card id='chat-info'>
         <q-separator/>
         <q-card-section :class="'q-mx-md text-weight-regular '+computedDescriptionSize">
             {{chat.description}}
@@ -37,7 +37,7 @@
         <q-card-section :class="'q-ml-'+computedMargins+' q-pt-sm row justify-between'">
             <div v-if='chat.owner.id !== loggedId'>
                 <div class='text-h6'>
-                    <q-item-label caption>
+                    <q-item-label caption class='text-black'>
                         Created by:
                     </q-item-label>
                     <q-chip :ripple='false'>
@@ -49,11 +49,11 @@
                 </div>
             </div>
             <div v-else class='q-mt-sm row no-wrap'>
-                <q-btn outline round color='grey-4' icon='settings'  @click='askForUpdate()'/>
+                <q-btn outline round color='dark' icon='settings'  @click='askForUpdate()'/>
                 <q-btn class='q-ml-md' outline round color='negative' icon='delete' @click='deleteChat()'/>
             </div>
             <div :class="'q-mr-'+computedMargins+' q-mt-sm row no-wrap'">
-                <q-btn class='q-mx-sm' outline rounded color='primary' label='Join' @click='join()'/>
+                <q-btn class='q-mx-sm' outline rounded color='dark' label='Join' @click='join()'/>
                 <q-btn class='q-mx-sm' outline round :text-color='computedStar' icon='star' @click='execFav()'/>
             </div>
         </q-card-section>
@@ -97,7 +97,7 @@ export default{
             return this.$store.getters['usuario/'+GET_USUARIO].favChats?.filter(c => c.id === this.chat.id).length !== 0
         },
         computedStar(){
-            return this.isFav ? 'yellow' : 'grey-4'
+            return this.isFav ? 'yellow-9' : 'grey-8'
         }
     },
     methods:{
@@ -155,3 +155,8 @@ export default{
     }
 }
 </script>
+<style lang="scss">
+#chat-info{
+    background-color: $dark-secondary;
+}
+</style>

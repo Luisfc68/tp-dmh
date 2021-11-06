@@ -14,11 +14,11 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container>
+    <q-page-container class='fondo'>
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
+    <q-footer elevated id='footer' class="text-black">
       <q-toolbar>
         <q-toolbar-title>
           <div class='text-subtitle2'>Luis Chavez - Desarrollo movil hibrido</div>
@@ -36,3 +36,8 @@ export default defineComponent({
   name: 'AuthLayout'
 })
 </script>
+<style lang="scss" scoped>
+#footer{
+  background-color: $dark-secondary;
+}
+</style>

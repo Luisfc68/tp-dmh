@@ -1,5 +1,5 @@
 <template>
-    <q-scroll-area class='q-px-sm bg-grey-6 rounded-borders row items-end' ref='area'>
+    <q-scroll-area id='chat' class='q-px-sm rounded-borders row items-end' ref='area'>
         <q-infinite-scroll @load='onLoad' ref='scroll' reverse class='col-12' :debounce='500'>
             <template v-slot:loading>
             <div class='row justify-center q-my-md'>
@@ -62,3 +62,8 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+#chat{
+    background-color: #5aa0d3;
+}
+</style>

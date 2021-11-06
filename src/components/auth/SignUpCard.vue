@@ -11,8 +11,8 @@
         </q-card-section>
         <q-separator/>
         <q-card-actions class='q-pa-md' align='right'>
-            <q-btn push class='q-mx-md' icon='done' type='submit'>  Sign up  </q-btn>
-            <q-btn push class='q-mx-md' icon='cancel' type='reset'>  Cancel  </q-btn>
+            <q-btn push class='q-mx-md' icon='done' type='submit' color='secondary'>  Sign up  </q-btn>
+            <q-btn push class='q-mx-md' icon='close' type='reset' color='secondary'>  Cancel  </q-btn>
         </q-card-actions>
     </q-form>
 </template>

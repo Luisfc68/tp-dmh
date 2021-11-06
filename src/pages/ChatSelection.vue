@@ -4,16 +4,25 @@
       <div class='full-width row justify-between'>
 
         <div class='q-ml-lg q-mb-sm row items-end'>
-          <q-input v-model='query' label='Busca chats (# -> tags)' dense @keyup.enter='pedirQuery(false)' :disable='searching' >
+          <q-input
+            v-model='query' 
+            label='Busca chats (# -> tags)' 
+            dense 
+            @keyup.enter='pedirQuery(false)' 
+            :disable='searching' 
+            label-color='black'
+            color='primary'
+            input-class='text-black'
+          >
             <template v-slot:append>
-              <q-icon v-if="query !== ''" name='close' @click='resetQuery()' class='cursor-pointer' />
-              <q-icon name='search' class='cursor-pointer' @click='pedirQuery(false)' />
+              <q-icon v-if="query !== ''" name='close' @click='resetQuery()' class='cursor-pointer' color='primary'/>
+              <q-icon name='search' class='cursor-pointer' @click='pedirQuery(false)' color='primary' />
             </template>
           </q-input>
         </div>
 
         <div class='q-mb-sm q-mr-lg row items-end'>
-          <q-btn round size='sm' color="primary" icon="add" @click='crear()'/>
+          <q-btn round size='sm' color="dark" icon="add" @click='crear()'/>
         </div>
 
       </div>
@@ -23,7 +32,7 @@
         </q-list>
         <template v-slot:loading>
           <div class="row justify-center q-my-md">
-            <q-spinner-dots color="primary" size="40px" />
+            <q-spinner-dots color="accent" size="40px" />
           </div>
         </template>
       </q-infinite-scroll>

@@ -1,12 +1,13 @@
 <template>
-    <div class='self-end row justify-center bg-grey-4 q-py-sm rounded-borders no-wrap full-width'>
+    <div class='self-end row justify-center bg-secondary q-py-sm rounded-borders no-wrap full-width'>
         <div class='col-1 self-end q-mb-sm'>
             <q-btn 
                 round 
                 dense 
                 flat 
                 icon='logout'
-                @click='leave()' 
+                @click='leave()'
+                class='btn-chat'
             />
         </div>
         <div class='col-1 self-end q-mb-sm q-mr-sm'>
@@ -15,7 +16,8 @@
                 round 
                 dense 
                 flat 
-                icon='cancel' 
+                icon='cancel'
+                class='btn-chat'
             />
         </div>
         <q-input
@@ -25,6 +27,8 @@
             autogrow
             input-style='max-height: 3rem'
             class='col-8'
+            bg-color='grey-4'
+            input-class='text-weight-medium'
         />
         <div class='col-1 self-end q-mb-sm flex justify-center'>
             <q-btn 
@@ -32,7 +36,8 @@
                 round 
                 dense 
                 flat 
-                icon='send' 
+                icon='send'
+                class='btn-chat'
             />
         </div>
     </div>
@@ -92,3 +97,8 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+.btn-chat{
+    color: $fondo
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div class='bg-grey-4 full-width rounded-borders self-start overflow-hidden'>
-        <q-expansion-item>
+        <q-expansion-item header-class='bg-secondary text-white' expand-icon-class='text-grey-6'>
             <template v-slot:header>
                 <div class='row'>
                     <q-item-section avatar class='q-pr-md'>
