@@ -28,6 +28,7 @@
 import { ref } from 'vue'
 import ProfileComponent from 'components/user/ProfileComponent.vue'
 import { GET_USUARIO } from 'src/store/usuario/types'
+import { OTHER_CONNECTION } from 'src/socket/socketEvents'
 
 export default {
   name: 'AppLayout',
@@ -47,6 +48,16 @@ export default {
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
+    }
+  },
+  sockets:{
+    [OTHER_CONNECTION](){
+      this.$q.dialog({
+          title: 'X_X',
+          message: 'Iniciaste sesión en otro lado',
+          persistent: true,
+          ok: false
+      })
     }
   }
 }

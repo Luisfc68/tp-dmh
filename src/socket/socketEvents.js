@@ -11,6 +11,7 @@ const LEAVE_ROOM = 'leaveRoom'
 const CLEAN_LEAVE_ROOM = 'cleanLeaveRoom'
 const JOIN_CONFIRM = 'joinConfirm'
 const CHAT_CHANGED = 'chatChanged'
+const OTHER_CONNECTION = 'otherConnection'
 
 export {
     CONNECTION_SUCCESS,
@@ -24,5 +25,6 @@ export {
     LEAVE_ROOM,
     CLEAN_LEAVE_ROOM,
     JOIN_CONFIRM,
-    CHAT_CHANGED
+    CHAT_CHANGED,
+    OTHER_CONNECTION
 }
