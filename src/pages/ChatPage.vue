@@ -15,7 +15,7 @@ import ChatHeader from '../components/chat/ChatHeader.vue'
 import ChatArea from '../components/chat/ChatArea.vue'
 import { mapGetters } from 'vuex'
 import { GET_CHAT } from 'src/store/chat/types'
-import {MSG_REQUEST, MSG_SENT, ERROR, JOIN_ROOM,LEAVE_ROOM, CLEAN_LEAVE_ROOM} from 'src/socket/socketEvents'
+import {MSG_REQUEST, MSG_SENT, ERROR, JOIN_ROOM,LEAVE_ROOM, CLEAN_LEAVE_ROOM,JOIN_CONFIRM} from 'src/socket/socketEvents'
 
 export default {
     name: 'ChatPage',
@@ -93,6 +93,10 @@ export default {
                 }
             })
             this.notifyNew()
+        },
+        [JOIN_CONFIRM](){
+            this.messages = []
+            this.messagesRemain = true
         },
         [ERROR](error){
             console.log(error)

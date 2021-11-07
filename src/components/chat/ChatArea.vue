@@ -33,9 +33,6 @@ export default {
                     offset: this.messages.length
                 })
 
-                if(!this.messagesRemain)
-                    this.$refs.scroll.stop()
-
                 if(this.messages.length <= 10)
                     this.mover(1)
                 else
@@ -58,6 +55,12 @@ export default {
     watch:{
         newMsg: function(){
             this.newSingleMessage()
+        },
+        messagesRemain: function(){
+            if(this.messagesRemain === true)
+                this.$refs.scroll.resume()
+            else
+                this.$refs.scroll.stop()
         }
     }
 }
