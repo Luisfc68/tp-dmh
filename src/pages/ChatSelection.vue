@@ -95,7 +95,7 @@ export default {
       const query = this.parsearQuery()
       if(!isNextPage){
         this.chats = []
-        this.$refs.scroll.resume()  
+        setTimeout(() => this.$refs.scroll.resume(),1000)
       }
       let busqueda = {
         offset: this.chats.length,

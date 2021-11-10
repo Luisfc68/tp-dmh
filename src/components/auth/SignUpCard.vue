@@ -67,7 +67,7 @@ export default {
                 console.log(e)
                this.$q.notify({
                    type: 'negative',
-                   message: e
+                   message: e.response.data.message
                })
             })
         }

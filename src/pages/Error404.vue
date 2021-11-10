@@ -12,7 +12,7 @@
         color="white"
         text-color="blue"
         unelevated
-        to="/"
+        :to="{name: 'lobby'}"
         label="Go Home"
         no-caps
       />
