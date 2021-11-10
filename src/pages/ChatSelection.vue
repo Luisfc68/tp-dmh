@@ -26,7 +26,7 @@
         </div>
 
       </div>
-      <q-infinite-scroll @load='onLoad' :offset='350' ref='scroll'>
+      <q-infinite-scroll @load='onLoad' :offset='350' ref='scroll' :debounce='500'>
         <q-list>
           <ChatComponent v-for='chat in chats' :key='chat.id' :chat='chat' @deleted='refresh()' @update='(data) => actualizar(data)'/>
         </q-list>
@@ -71,11 +71,12 @@ export default {
   },
   methods:{
     onLoad(index, done){
-      if(this.query === '')
-        this.pedir()
-      else
-        this.pedirQuery(true)
       setTimeout(() => {
+        if(this.query === '' && !this.searching)
+          this.pedir()
+        else if(!this.searching){
+          this.pedirQuery(true)
+        }
         done()
       },2000)
     },
@@ -95,7 +96,7 @@ export default {
       const query = this.parsearQuery()
       if(!isNextPage){
         this.chats = []
-        setTimeout(() => this.$refs.scroll.resume(),1000)
+        this.$refs.scroll.resume()
       }
       let busqueda = {
         offset: this.chats.length,
@@ -127,9 +128,9 @@ export default {
   sockets:{
     [CHAT_REQUEST](data){
       this.chats.push(...data);
-      this.searching = false
       if(data.length === 0)
         this.$refs.scroll.stop()
+      this.searching = false
     }
   }
 }
