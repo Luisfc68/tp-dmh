@@ -1,26 +1,3 @@
 # Tp-client (tp-client)
 
-Cliente del tp
-
-## Install the dependencies
-```bash
-npm install
-```
-
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
-
-### Lint the files
-```bash
-npm run lint
-```
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+Trabajo practico de desarrollo móvil híbrido. Consiste en una aplicación de chat que sirve como cliente del [TP de técnicas avanzadas de programación](https://github.com/Luisfc68/tp-tap). Este trabajo [está deployado en AWS](http://tp-dmh.s3-website-us-east-1.amazonaws.com) y puede ser usado siempre y cuando el servidor esté corriendo.
