@@ -28,7 +28,7 @@
                 </q-item-section>
             </div>
         </template>
-    <q-card id='chat-info'>
+    <q-card class="bg-dark-secondary">
         <q-separator/>
         <q-card-section :class="'q-mx-md text-weight-regular '+computedDescriptionSize">
             {{chat.description}}
@@ -155,8 +155,3 @@ export default{
     }
 }
 </script>
-<style lang="scss">
-#chat-info{
-    background-color: $dark-secondary;
-}
-</style>

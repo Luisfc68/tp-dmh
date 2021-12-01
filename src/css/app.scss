@@ -11,6 +11,19 @@
     background: rgba(255,255,255,.5);
 }
 
-.fondo{
-    background-color: $fondo;
+// custom colors 
+.text-fondo{
+    color: $fondo !important;
+}
+
+.bg-fondo{
+    background: $fondo !important;
+}
+
+.text-dark-secondary{
+    color: $dark-secondary !important;
+}
+
+.bg-dark-secondary{
+    background: $dark-secondary !important;
 }

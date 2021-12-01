@@ -7,7 +7,7 @@
                 flat 
                 icon='logout'
                 @click='leave()'
-                class='btn-chat'
+                class='text-fondo'
             />
         </div>
         <div class='col-1 self-end q-mb-sm q-mr-sm'>
@@ -17,7 +17,7 @@
                 dense 
                 flat 
                 icon='cancel'
-                class='btn-chat'
+                class='text-fondo'
             />
         </div>
         <q-input
@@ -37,7 +37,7 @@
                 dense 
                 flat 
                 icon='send'
-                class='btn-chat'
+                class='text-fondo'
             />
         </div>
     </div>
@@ -97,8 +97,3 @@ export default {
     }
 }
 </script>
-<style lang="scss">
-.btn-chat{
-    color: $fondo
-}
-</style>

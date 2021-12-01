@@ -13,11 +13,11 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer :width=350 v-model="leftDrawerOpen" side="left" overlay elevated class='fondo'>
+    <q-drawer :width=350 v-model="leftDrawerOpen" side="left" overlay elevated class='bg-fondo'>
         <ProfileComponent :usuario='usuario' v-on:close='toggleLeftDrawer' />
     </q-drawer>
 
-    <q-page-container class='fondo'>
+    <q-page-container class='bg-fondo'>
       <router-view />
     </q-page-container>
 
