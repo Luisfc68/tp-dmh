@@ -6,20 +6,54 @@
               round 
               size='md' 
               color="dark" 
-              icon="add" 
+              icon="add"
+              @click="editandoTema=true" 
             />
           </div>
-          <ThemeComponent class="col-sm-3" v-for="n in 10" :key="n"/>
+          <ThemeComponent 
+            class="col-sm-3" 
+            v-for="(tema) in temas" 
+            :key="tema.title" 
+            :tema="tema"
+            @update="tema => iniciarEdicion(tema)"
+          />
       </div>
+      <q-dialog v-model="editandoTema" persistent>
+        <EditionThemeComponent :tema="temaEdicion" @close="editandoTema=false"/>
+      </q-dialog>
   </q-page>
 </template>
 <script>
 import ThemeComponent from '../components/custom/ThemeComponent.vue'
+import EditionThemeComponent from '../components/custom/EditionThemeComponent.vue'
+import { mapGetters } from 'vuex'
+import { GET_THEMES } from 'src/store/custom/types'
 
 export default {
     name: 'CustomizationPage',
     components: {
-        ThemeComponent
+        ThemeComponent,
+        EditionThemeComponent
     },
+    data(){
+      return {
+        editandoTema: false,
+        temaEdicion: null,
+        temas: this.getThemes()
+      }
+    },
+    methods:{
+      ...mapGetters('custom',[GET_THEMES]),
+      iniciarEdicion(tema){
+        this.temaEdicion = tema
+        this.editandoTema = true
+      }
+    },
+    watch:{
+      editandoTema: function(){
+        if(!this.editandoTema)
+          this.temaEdicion = null
+      }
+    }
 }
 </script>
