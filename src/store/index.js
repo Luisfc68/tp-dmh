@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 
 import usuario from './usuario'
 import chat from './chat'
+import custom from './custom'
 
 /*
  * If not building with SSR mode, you can
@@ -17,7 +18,8 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
       usuario,
-      chat
+      chat,
+      custom
     },
 
     // enable strict mode (adds overhead!)
