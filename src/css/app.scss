@@ -13,17 +13,17 @@
 
 // custom colors 
 .text-fondo{
-    color: $fondo !important;
+    color: var(--q-fondo) !important;
 }
 
 .bg-fondo{
-    background: $fondo !important;
+    background: var(--q-fondo) !important;
 }
 
 .text-dark-secondary{
-    color: $dark-secondary !important;
+    color: var(--q-dark-secondary) !important;
 }
 
 .bg-dark-secondary{
-    background: $dark-secondary !important;
+    background: var(--q-dark-secondary) !important;
 }

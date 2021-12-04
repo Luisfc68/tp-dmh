@@ -22,5 +22,9 @@ $negative  : #C10015;
 $info      : #4091C9;
 $warning   : #F2C037;
 
-$dark-secondary: #b9dffa;
-$fondo : #9DCEE2;
+//Esta forma de definirlos hace que puedan ser dinamicos
+//extraida de la pagina de quasar
+:root{
+    --q-fondo: #9DCEE2;
+    --q-dark-secondary: #b9dffa;
+}
