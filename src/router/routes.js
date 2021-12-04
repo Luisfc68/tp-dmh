@@ -38,6 +38,11 @@ const routes = [
         path: '',
         name: 'chat',
         component: () => import('src/pages/ChatPage.vue') 
+      },
+      {
+        path: '',
+        name: 'custom',
+        component: () => import('src/pages/CustomizationPage.vue')
       }
     ]
   },

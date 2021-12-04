@@ -5,6 +5,14 @@
             <q-space />
             <q-btn
                 v-close-popup
+                :to="{name: 'custom'}"
+                flat
+                round
+                dense
+                icon="palette" 
+            />
+            <q-btn
+                v-close-popup
                 flat
                 round
                 dense
