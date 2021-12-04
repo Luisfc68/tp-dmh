@@ -4,7 +4,7 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 import { GET_TOKEN } from 'src/store/usuario/types'
 
-const api = axios.create({ baseURL: 'http://ec2-107-20-23-84.compute-1.amazonaws.com/tap' })
+const api = axios.create({ baseURL: 'http://ec2-54-174-5-245.compute-1.amazonaws.com/tap' })
 
 export default boot(({ app,store }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
