@@ -10,6 +10,13 @@
             Chat application TP
           </div>
         </q-toolbar-title>
+        <q-btn
+          :to="{name: 'lobby'}"
+          flat
+          round
+          dense
+          icon="chat" 
+        />
       </q-toolbar>
     </q-header>
 
